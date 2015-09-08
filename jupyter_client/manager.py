@@ -25,7 +25,6 @@ from traitlets import (
     Any, Instance, Unicode, List, Bool, Type, DottedObjectName
 )
 from jupyter_client import (
-    launch_kernel,
     kernelspec,
 )
 from .connect import ConnectionFileMixin
@@ -184,7 +183,7 @@ class KernelManager(ConnectionFileMixin):
 
         override in a subclass to launch kernel subprocesses differently
         """
-        return launch_kernel(kernel_cmd, **kw)
+        pass
 
     # Control socket used for polite kernel shutdown
 
