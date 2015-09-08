@@ -30,9 +30,6 @@ from jupyter_client import (
 )
 from .connect import ConnectionFileMixin
 from .session import Session
-from .managerabc import (
-    KernelManagerABC
-)
 
 
 class KernelManager(ConnectionFileMixin):
@@ -237,7 +234,7 @@ class KernelManager(ConnectionFileMixin):
             # If kernel_cmd has been set manually, don't refer to a kernel spec
             # Environment variables from kernel spec are added to os.environ
             env.update(self.kernel_spec.env or {})
-        
+
         # launch the kernel subprocess
         self.log.debug("Starting kernel: %s", kernel_cmd)
         self.kernel = self._launch_kernel(kernel_cmd, env=env,
@@ -410,9 +407,6 @@ class KernelManager(ConnectionFileMixin):
         else:
             # we don't have a kernel
             return False
-
-
-KernelManagerABC.register(KernelManager)
 
 
 def start_new_kernel(startup_timeout=60, kernel_name='python', **kwargs):
