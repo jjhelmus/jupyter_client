@@ -17,8 +17,6 @@ from zmq import ZMQError
 
 from jupyter_client import protocol_version_info
 
-from .channelsabc import HBChannelABC
-
 #-----------------------------------------------------------------------------
 # Constants and exceptions
 #-----------------------------------------------------------------------------
@@ -200,4 +198,3 @@ class HBChannel(Thread):
         pass
 
 
-HBChannelABC.register(HBChannel)

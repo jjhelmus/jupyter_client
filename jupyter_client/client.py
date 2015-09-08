@@ -13,7 +13,6 @@ from traitlets import (
     Any, Instance, Type,
 )
 
-from .channelsabc import (ChannelABC, HBChannelABC)
 from .connect import ConnectionFileMixin
 
 
@@ -51,12 +50,6 @@ class KernelClient(ConnectionFileMixin):
     context = Instance(zmq.Context)
     def _context_default(self):
         return zmq.Context.instance()
-
-    # The classes to use for the various channels
-    shell_channel_class = Type(ChannelABC)
-    iopub_channel_class = Type(ChannelABC)
-    stdin_channel_class = Type(ChannelABC)
-    hb_channel_class = Type(HBChannelABC)
 
     # Protected traits
     _shell_channel = Any()
