@@ -348,14 +348,8 @@ class KernelClient(ConnectionFileMixin):
         return msg['header']['msg_id']
 
     def _handle_kernel_info_reply(self, msg):
-        """handle kernel info reply
-
-        sets protocol adaptation version. This might
-        be run from a separate thread.
-        """
-        adapt_version = int(msg['content']['protocol_version'].split('.')[0])
-        if adapt_version != major_protocol_version:
-            self.session.adapt_version = adapt_version
+        """handle kernel info reply """
+        pass
 
     def shutdown(self, restart=False):
         """Request an immediate kernel shutdown.

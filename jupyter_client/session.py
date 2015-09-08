@@ -58,7 +58,6 @@ from traitlets import (CBytes, Unicode, Bool, Any, Instance, Set,
                                         TraitError,
 )
 from jupyter_client import protocol_version
-from jupyter_client.adapter import adapt
 from traitlets.log import get_logger
 
 
@@ -350,9 +349,9 @@ class Session(Configurable):
     digest_mod = Any()
     def _digest_mod_default(self):
         return hashlib.sha256
-    
+
     auth = Instance(hmac.HMAC, allow_none=True)
-    
+
     def _new_auth(self):
         if self.key:
             self.auth = hmac.HMAC(self.key, digestmod=self.digest_mod)
@@ -660,8 +659,6 @@ class Session(Configurable):
             )
             return
         buffers = [] if buffers is None else buffers
-        if self.adapt_version:
-            msg = adapt(msg, self.adapt_version)
         to_send = self.serialize(msg, ident)
         to_send.extend(buffers)
         longest = max([ len(s) for s in to_send ])
@@ -866,8 +863,7 @@ class Session(Configurable):
         message['buffers'] = buffers
         if self.debug:
             pprint.pprint(message)
-        # adapt to the current version
-        return adapt(message)
+        return message
 
     def unserialize(self, *args, **kwargs):
         warnings.warn(
