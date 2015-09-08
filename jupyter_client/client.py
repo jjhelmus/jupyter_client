@@ -14,7 +14,6 @@ from traitlets import (
 )
 
 from .channelsabc import (ChannelABC, HBChannelABC)
-from .clientabc import KernelClientABC
 from .connect import ConnectionFileMixin
 
 
@@ -397,6 +396,3 @@ class KernelClient(ConnectionFileMixin):
         content = dict(value=string)
         msg = self.session.msg('input_reply', content)
         self.stdin_channel.send(msg)
-
-
-KernelClientABC.register(KernelClient)
